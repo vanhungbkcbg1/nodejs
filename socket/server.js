@@ -43,15 +43,27 @@ io.on('connection', function (socket) {
     //});
 
     //send image file to client
-    fs.readFile(__dirname+'/Desert.jpg', function (err,data) {
+    //fs.readFile(__dirname+'/Desert.jpg', function (err,data) {
+    //
+    //    if(err){
+    //        console.log('loi roi');
+    //        //socket.emit('image_receive',{error:1});
+    //
+    //    }else{
+    //        console.log('thanh cong roi');
+    //        socket.emit('image_receive',{error:0,data:data.toString('base64')});
+    //    }
+    //});
+
+
+    //send word file
+    fs.readFile(__dirname+'/test.doc', function (err,data) {
 
         if(err){
-            console.log('loi roi');
-            //socket.emit('image_receive',{error:1});
-
+            socket.emit('word_file_receive',{error:1});
         }else{
-            console.log('thanh cong roi');
-            socket.emit('image_receive',{error:0,data:data.toString('base64')});
+            socket.emit('word_file_receive',{error:0,data:data});
         }
     });
+
 });
