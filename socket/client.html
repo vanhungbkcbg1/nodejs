@@ -10,6 +10,8 @@
     Your browser does not support the HTML5 canvas tag.
 </canvas>
 
+<img src="" id="image">
+
 <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 <script>
     var socket = io('http://localhost:456');
@@ -35,9 +37,15 @@
         }else
         {
             var ctx = document.getElementById('canvas').getContext('2d');
+//            var image=document.getElementById('image');
+//            image.sr
             var img = new Image();
             img.src = 'data:image/jpeg;base64,' + data.data;
             ctx.drawImage(img, 0, 0);
+
+
+            var image=document.getElementById('image');
+            image.src= 'data:image/jpeg;base64,' + data.data;
         }
     });
 </script>
