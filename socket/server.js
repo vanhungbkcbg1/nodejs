@@ -62,7 +62,7 @@ io.on('connection', function (socket) {
         if(err){
             socket.emit('word_file_receive',{error:1});
         }else{
-            socket.emit('word_file_receive',{error:0,data:data});
+            socket.emit('word_file_receive',{error:0,data:data.toString('base64')});
         }
     });
 
