@@ -1,8 +1,12 @@
+/**
+ * Created by 749 on 1/11/2017.
+ */
+
 var http = require('http');
 var fs=require('fs');
 http.createServer(function (req, res) {
-res.writeHead(200, {'Content-Type': 'text/plain'});
-    fs.readFile(__dirname+'/read.txt', function (err, data) {
+    res.writeHead(200, {'Content-Type': 'image/jpg'});
+    fs.readFile(__dirname+'/Desert.jpg', function (err, data) {
         if(err){
             res.end('have an error');
         }
