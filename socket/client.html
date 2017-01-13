@@ -55,13 +55,17 @@
                 console.log('have an error when receive word file');
             }else{
                 var contentType='application/msword';
-//                var blob = new Blob(data.data, {type: 'application/msword'});
-//                var blobUrl = URL.createObjectURL(blob);
-//
-//                window.location = blobUrl;
-                var dataUrl = 'data:' + contentType + ';base64,' + data.data;
 
-                window.location = dataUrl;
+                var dataView = new DataView(data.data);
+                var blob = new Blob([dataView], { type: contentType });
+//                var blob = new Blob(data.data, {type: 'application/msword'});
+                var blobUrl = URL.createObjectURL(blob);
+//
+                window.location = blobUrl;
+//                var dataUrl = 'data:' + contentType + ';base64,' + data.data;
+//                var dataUrl = 'data:' + contentType + ';base64,' + data.data;
+
+//                window.location = dataUrl;
                 console.log(data.data);
             }
     });
