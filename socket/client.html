@@ -12,6 +12,9 @@
 
 <img src="" id="image">
 
+<input type="file" id="file">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 <script>
     var socket = io('http://localhost:456');
@@ -74,6 +77,18 @@
                 a.click();
             }
     });
+
+
+        //send file to server
+        $(document).ready(function () {
+            $("#file").change(function () {
+
+                var file=this.files[0];
+                console.log(file);
+                socket.emit('sendfile',{file:file,file_name:file.name});
+            });
+        });
+
 </script>
 </body>
 </html>

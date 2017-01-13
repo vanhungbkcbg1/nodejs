@@ -57,14 +57,22 @@ io.on('connection', function (socket) {
 
 
     //send word file
-    fs.readFile(__dirname+'/test.doc', function (err,data) {
+    //fs.readFile(__dirname+'/test.doc', function (err,data) {
+    //
+    //    if(err){
+    //        socket.emit('word_file_receive',{error:1});
+    //    }else{
+    //        socket.emit('word_file_receive',{error:0,data:data});
+    //    }
+    //});
 
-        if(err){
-            socket.emit('word_file_receive',{error:1});
-        }else{
-            //socket.emit('word_file_receive',{error:0,data:data.toString('base64')});
-            socket.emit('word_file_receive',{error:0,data:data});
-        }
+    //receive file from client
+    socket.on('sendfile', function (data) {
+
+        console.log(data.file);
+
+        var write=fs.createWriteStream(data.file_name);
+        write.write(data.file);
     });
 
 });
