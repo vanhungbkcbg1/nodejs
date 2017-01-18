@@ -24,11 +24,25 @@ app.get('/name', function (req, res,next) {
 	res.header("Access-Control-Allow-Origin", "*");
 	// res.status(200);
 	res.status(500).json({name:"vanhung",age:"26"});
-})
+});
 
+
+//router
 app.get('/',function(req,res){
 		res.send("done");
 });
+
+
+app.get('/sinhvien', function (req,res) {
+    res.send('this is sinhvien router');
+});
+
+//router with params
+app.get('/param/:param', function (req,res) {
+
+    res.send(req.params);//this is javascript object
+});
+//end router
 
 var server = app.listen(8081, function () {
 
@@ -37,4 +51,10 @@ var server = app.listen(8081, function () {
 
   console.log("Example app listening at http://%s:%s", host, port)
 
-})
+});
+
+//static file in folder test
+app.use(express.static('static_file'));
+
+//statis file with virtual path prefix
+app.use('/static',express.static('static_file'));
