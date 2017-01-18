@@ -1,17 +1,27 @@
 var express = require('express');
 var app = express();
+const formidable = require('express-formidable');
+var fs=require('fs');
+const path = require('path');
 
 //handling error
 //xu li loi trong moi truong phat trien
-if(app.get('env')==="development")
-{
 
-	app.use(function(err,req,res,next){
-		
-		res.send("loi roi");
-	});
 
-}
+app.use(formidable());
+
+//static file in folder test
+app.use(express.static('static_file'));
+
+//statis file with virtual path prefix
+app.use('/static',express.static('static_file'));
+
+//handling error
+app.use(function(err, req, res, next) {
+   res.send('not found');
+});
+
+
 
 // app.use(function(err,res,res,next){
 	// res.send(err.message);
@@ -45,6 +55,38 @@ app.get('/param/:param', function (req,res) {
 
     res.send(req.params);//this is javascript object
 });
+
+app.post('/upload', function (req,res) {
+
+    //res.send(req.files);
+    try{
+
+        if(req.files.image_file){
+            //
+            fs.readFile(req.files.image_file.path,function (err,data) {
+
+                if(err){
+                    res.send('error');
+                }
+                var file_name=path.join(__dirname,'upload',req.files.image_file.name);
+                console.log(file_name);
+                //write file
+                fs.writeFile(file_name,data, function (err,data) {
+
+                    if(err){
+                        res.send('have an error when upload file');
+                    }
+                    res.send('upload file sucessfull');
+                });
+            });
+        }
+    } catch(e){
+        res.send(e);
+    }
+
+});
+
+
 //end router
 
 var server = app.listen(8081, function () {
@@ -55,9 +97,3 @@ var server = app.listen(8081, function () {
   console.log("Example app listening at http://%s:%s", host, port)
 
 });
-
-//static file in folder test
-app.use(express.static('static_file'));
-
-//statis file with virtual path prefix
-app.use('/static',express.static('static_file'));
