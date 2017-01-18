@@ -34,7 +34,10 @@ app.get('/',function(req,res){
 
 
 app.get('/sinhvien', function (req,res) {
-    res.send('this is sinhvien router');
+    console.log('sinhvien call');
+    //redirect to param
+    res.redirect('/param/from_sinhvien');
+    //res.send('this is sinhvien router');
 });
 
 //router with params
