@@ -3,6 +3,8 @@ var app = express();
 const formidable = require('express-formidable');
 var fs=require('fs');
 const path = require('path');
+var config=require('./config/database.json');
+app.set('config',config);
 
 //handling error
 //xu li loi trong moi truong phat trien
@@ -16,10 +18,7 @@ app.use(express.static('static_file'));
 //statis file with virtual path prefix
 app.use('/static',express.static('static_file'));
 
-//handling error
-app.use(function(err, req, res, next) {
-   res.send('not found');
-});
+
 
 
 
@@ -37,23 +36,57 @@ app.get('/name', function (req, res,next) {
 });
 
 
-//router
-app.get('/',function(req,res){
-		res.send("done");
+//stream image and other file to client
+app.get('/image', function (req,res) {
+
+    var stream=fs.createReadStream('./image/test.jpg');
+    stream.pipe(res);
+});
+
+//non-stream
+app.get('/non-stream', function(req, res) {
+    var file = fs.readFileSync('./image/test.jpg');
+    res.end(file);
 });
 
 
-app.get('/sinhvien', function (req,res) {
+//router
+app.get('/',function(req,res){
+    
+		res.send("done");
+});
+
+app.get('/config', function (req,res) {
+
+    res.send(config);
+});
+
+
+app.get('/sinhvien', function (req,res,next) {
     console.log('sinhvien call');
     //redirect to param
-    res.redirect('/param/from_sinhvien');
-    //res.send('this is sinhvien router');
+    //res.redirect('/param/from_sinhvien');
+    //var err=new Error('error');
+    //return next(err);
+    res.send('this is sinhvien router');
 });
 
 //router with params
 app.get('/param/:param', function (req,res) {
 
+    console.log('name is %s',req.name);
     res.send(req.params);//this is javascript object
+
+});
+
+
+//this middleware will be executed every /:param is requested
+app.param('param', function (req,res,next,param) {
+
+    console.log('request param is executed');
+    console.log(param);
+    req.name="vanhung";
+   return next();
 });
 
 app.post('/upload', function (req,res) {
@@ -84,6 +117,11 @@ app.post('/upload', function (req,res) {
         res.send(e);
     }
 
+});
+
+//handling error
+app.use(function(err, req, res, next) {
+    res.send('not found');
 });
 
 

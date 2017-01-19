@@ -1,0 +1,15 @@
+{
+  "db": {
+    "host": "http://localhost",
+    "port": 27017,
+    "username": "azat",
+    "password": "CE0E08FE-E486-4AE0-8441-2193DF8D5ED0"
+  },
+  "hackhall": {
+    "api_key": "C7C211A6-D8A7-4E41-99E6-DA0EB95CD864"
+  },
+  "twitter": {
+    "consumer_key": "668C68E1-B947-492E-90C7-F69F5D32B42E",
+    "consumer_secret": "4B5EE783-E6BB-4F4E-8B05-2A746056BEE1"
+  }
+}
