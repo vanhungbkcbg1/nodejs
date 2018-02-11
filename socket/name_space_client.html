@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<title>Socket.IO chat</title>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font: 13px Helvetica, Arial; }
+    form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+    form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+    form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+    #Room { list-style-type: none; margin: 0; padding: 0; }
+    #Room li { padding: 5px 10px; }
+    #Room li:nth-child(odd) { background: #eee; }
+</style>
+</head>
+<body>
+<ul id="Room">
+    <li room="1">Room1</li>
+    <li room="2">Room2</li>
+    <li room="3">Room3</li>
+</ul>
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+<script>
+    var url="http://localhost:456";
+//
+//
+    $(document).ready(function () {
+        $(document).on('click',"#Room li", function () {
+
+            var room=$(this).attr('room');
+            if(room==1){
+                location.href=url+'/room1';
+            }else if(room==2){
+                location.href=url+'/room2';
+            }else if(room==3){
+                location.href=url+'/room3';
+            }
+        });
+    });
+
+</script>
+</body>
+</html>
