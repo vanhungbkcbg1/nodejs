@@ -39,9 +39,15 @@
             return false;
         });
 
-        $(document).on('change', function () {
+
+        $(document).on('focusin','#m', function () {
 
             socket.emit('typing','typing');
+        });
+
+        $(document).on('focusout','#m', function () {
+
+            socket.emit('no_typing','typing');
         });
     });
 
@@ -49,8 +55,13 @@
         $("#messages").append($("<li>").text(data));
     });
 
+    socket.on('no_typing', function (data) {
+        $("#typing").remove();
+    });
+
     socket.on('typing', function (data) {
-        $("#messages").append($("<li>").text('typing....'));
+        $("#typing").remove();
+        $("#messages").append($("<li>").text('typing....').attr('id','typing'));
     });
 
 

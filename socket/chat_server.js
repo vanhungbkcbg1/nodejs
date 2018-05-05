@@ -40,4 +40,8 @@ io.on('connection', function (socket) {
         console.log('typing');
         socket.broadcast.emit('typing',data);
     });
+
+    socket.on('no_typing', function (data) {
+        socket.broadcast.emit('no_typing',data);
+    });
 });
