@@ -32,6 +32,8 @@ io.on('connection', function (socket) {
         // gui lai all client
         //io.emit('server_recieve_message','nhan roi nhe');
         //gui lai cac client khac,ngoai tru sender
+
+        //http://code.danyork.com/2011/01/25/node-js-doctors-offices-and-fast-food-restaurants-understanding-event-driven-programming/
         socket.broadcast.emit('server_recieve_message',data);
 
     });
