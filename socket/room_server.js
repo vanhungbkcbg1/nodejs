@@ -17,6 +17,10 @@ server.listen(456);
 //get all room socket.adapter.rooms
 io.on('connection', function (socket) {
 
+    //socket la doi tuong server tao ra voi tung client connect tois
+    //mac dinh khi tao socket thi server data day socket vao room chua socket id tuong ung
+    //ten room
+    //socket.adapter.room
     socket.on('tao-room', function (room_name) {
         socket.join(room_name);
         socket.room_name=room_name;
