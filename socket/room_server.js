@@ -21,6 +21,7 @@ io.on('connection', function (socket) {
     //mac dinh khi tao socket thi server data day socket vao room chua socket id tuong ung
     //ten room
     //socket.adapter.room
+    //xem them tai https://socket.io/docs/emit-cheatsheet/
     socket.on('tao-room', function (room_name) {
         socket.join(room_name);
         socket.room_name=room_name;
