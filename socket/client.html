@@ -6,9 +6,6 @@
 </head>
 <body>
 
-<canvas id="canvas" width="1024" height="768" style="border:1px solid #000000;">
-    Your browser does not support the HTML5 canvas tag.
-</canvas>
 
 <img src="" id="image">
 
@@ -39,12 +36,12 @@
             console.log('error when receive image');
         }else
         {
-            var ctx = document.getElementById('canvas').getContext('2d');
+//            var ctx = document.getElementById('canvas').getContext('2d');
 //            var image=document.getElementById('image');
 //            image.sr
-            var img = new Image();
-            img.src = 'data:image/jpeg;base64,' + data.data;
-            ctx.drawImage(img, 0, 0);
+//            var img = new Image();
+//            img.src = 'data:image/jpeg;base64,' + data.data;
+//            ctx.drawImage(img, 0, 0);
 
 
             var image=document.getElementById('image');

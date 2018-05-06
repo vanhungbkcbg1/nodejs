@@ -73,6 +73,21 @@ io.on('connection', function (socket) {
 
         var write=fs.createWriteStream(data.file_name);
         write.write(data.file);
+
+        //send image to client
+        fs.readFile(data.file_name, function (err,data) {
+
+            if(err){
+                console.log('loi roi');
+                //socket.emit('image_receive',{error:1});
+
+            }else{
+                console.log('thanh cong roi');
+                //socket.emit('image_receive',{error:0,data:data.toString('base64')});
+
+                socket.broadcast.emit('image_receive',{error:0,data:data.toString('base64')});
+            }
+        });
     });
 
 });
