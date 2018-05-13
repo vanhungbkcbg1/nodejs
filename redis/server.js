@@ -30,7 +30,7 @@ io.on('connection', function (socket) {
     redisClient.on("message", function (channel, message) {
         if(channel=='my-channel'){
 
-            io.emit('news',{hello:'work'});
+            socket.emit('news',{hello:'work'});
         }
 
     });
