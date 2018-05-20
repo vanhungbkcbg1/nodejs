@@ -2,7 +2,7 @@
  * Created by hungnv on 2018/05/14.
  */
 
-var {GraphQLObjectType,GraphQLList}=require('graphql');
+var {GraphQLObjectType,GraphQLList,GraphQLString}=require('graphql');
 var authors=require('../data/authors');
 var posts=require('../data/posts');
 var AuthorType=require('../Type/AuthorType');
@@ -24,7 +24,14 @@ const BlogQueryRootType = new GraphQLObjectType({
             resolve: function() {
                 return posts;
             }
+        },
+        message:{
+            type:GraphQLString,
+            resolve: function () {
+                return 'hungnv';
+            }
         }
+
     })
 });
 
