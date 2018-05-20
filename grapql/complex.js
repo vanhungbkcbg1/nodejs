@@ -10,14 +10,14 @@ let {buildSchema}=require('graphql');
 
 let mySchema = buildSchema(`
   type Query {
-    postTitle: String,
+    postTitle(name:String): String,
     blogTitle: String
   }
 `);
 
 let root = {
-    postTitle: () => {
-        return 'Build a Simple GraphQL Server With Express and NodeJS';
+    postTitle: (args) => {
+        return args.name;
     },
     blogTitle: () => {
         return 'scotch.io';
