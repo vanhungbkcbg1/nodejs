@@ -1,9 +1,19 @@
 var fs = require("fs");
 var http=require('http');
+const util = require('util');
 
-fs.readFile('read.txt', function (err, data) {
-    if (err) return console.error(err);
-    console.log(data.toString());
-});
+const readfileasyncpromise=util.promisify(fs.readFile);
 
-console.log("Program Ended");
+//fs.readFile('read.txt', function (err, data) {
+//    if (err) return console.error(err);
+//    console.log(data.toString());
+//});
+
+async function test(){
+    let result= await readfileasyncpromise('read.txt');
+    console.log(result);
+    return result;
+}
+
+test();
+
